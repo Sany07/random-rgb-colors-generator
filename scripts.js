@@ -15,6 +15,11 @@ geButton.addEventListener('click', function () {
         }
 
     });
+copyButton.addEventListener('click', function () {
+   navigator.clipboard.writeText(colorCode.value);
+   copyButton.innerText ='Copied';
+
+});
 
 function upDateColor(){
     let rgbColor = generateColor();
