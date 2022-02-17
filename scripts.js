@@ -3,23 +3,38 @@ window.onload = () => {
 	upDateColor();
 };
 
-let geButton =document.getElementById('ge-button')
+let generateColorButton =document.getElementById('ge-button')
 let colorPalate = document.getElementById('rgb-Color')
 let rgbColorCode = document.getElementById('rgb-color-code')
 let haxColorCode = document.getElementById('hax-color-code')
 let rgbCopyButton = document.getElementById('rgb-copy-button')
 let haxCopyButton = document.getElementById('hax-copy-button')
 
-geButton.addEventListener('click', function () {
+
+
+generateColorButton.addEventListener('click', function () {
         upDateColor();
-        if(RgbCopyButton.innerText !='Copy'){
-            RgbCopyButton.innerText ='Copy';
+        if(rgbCopyButton.innerText !='Copy'){
+            rgbCopyButton.innerText ='Copy';
+        }
+        if(haxCopyButton.innerText !='Copy'){
+            haxCopyButton.innerText ='Copy';
         }
 
     });
-copyButton.addEventListener('click', function () {
-   navigator.clipboard.writeText(rgbColorCode.value);
-   rgbCopyButton.innerText ='Copied';
+
+    function copyToClipboard(button,colorCode){
+        navigator.clipboard.writeText(colorCode.value);
+        button.innerText ='Copied';
+
+    }
+    
+rgbCopyButton.addEventListener('click', function () {
+   copyToClipboard(rgbCopyButton,rgbColorCode)
+
+});
+haxCopyButton.addEventListener('click', function () {
+   copyToClipboard(haxCopyButton,haxColorCode)
 
 });
 
@@ -28,8 +43,10 @@ function upDateColor(){
     let haxCode = generateColor()[1];
     console.log(rgbCode);
     console.log(haxCode);
-    colorPalate.style.backgroundColor  = rgbCode;
+    // colorPalate.style.backgroundColor  = rgbCode;
+    document.querySelector('#root').style.backgroundColor  = rgbCode;
     rgbColorCode.value=rgbCode;
+    haxColorCode.value=haxCode;
     }
 function generateColor(){
     const red = Math.floor(Math.random() * 255);
